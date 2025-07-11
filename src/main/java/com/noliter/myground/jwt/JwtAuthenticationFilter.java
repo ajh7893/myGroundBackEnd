@@ -29,13 +29,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
-
+        System.out.println("authHeader: " + authHeader);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-
+            System.out.println("Token: " + token);
             if (jwtUtil.isValid(token)) {
                 String username = jwtUtil.getUsername(token); // 또는 extractUsername
-
+                System.out.println("isValid: " + username);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

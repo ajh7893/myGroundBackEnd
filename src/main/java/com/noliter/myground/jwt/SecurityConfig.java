@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 👈 OPTIONS 허용
                         .requestMatchers("/login", "/refresh", "/register").permitAll()
+                        .requestMatchers("/api/todos/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
